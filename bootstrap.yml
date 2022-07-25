@@ -79,7 +79,7 @@
         path: "{{ drupal_composer_install_dir }}/web/sites/default/"
         mode: u+rw
         recurse: yes
-        owner: "{{ ansible_user }}"
+        owner: "{{ ansible_ssh_user | default(ansible_env.SUDO_USER, true) | default(ansible_env.USER, true) | default(ansible_user_id) }}"
       when:  defaultdir_exists.stat.exists == true
       become: yes
 

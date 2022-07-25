@@ -2,7 +2,7 @@
 
 drupal_composer_install_dir: /var/www/html/drupal
 drupal_composer_project_options: "--prefer-dist --no-interaction"
-drupal_core_owner: "{{ ansible_user }}"
+drupal_core_owner: "{{ ansible_ssh_user | default(ansible_env.SUDO_USER, true) | default(ansible_env.USER, true) | default(ansible_user_id) }}"
 
 drupal_deploy_dir: "{{ drupal_composer_install_dir }}"
 
